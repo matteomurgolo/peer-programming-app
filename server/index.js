@@ -106,7 +106,7 @@ function joinRoom(ws, room) {
 function sendJoinedMessage(ws, room) {
     console.log('Sending joined message to:', ws.room);
     const todos = rooms.get(ws.room).todos;
-    const message = JSON.stringify({ type: 'joined', payload: { todos } });
+    const message = JSON.stringify({ type: 'joined', payload: { todos, room } });
     ws.send(message);
 }
 
