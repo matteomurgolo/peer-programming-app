@@ -27,6 +27,7 @@ wss.on('connection', (ws) => {
     });
 });
 
+
 function handleWebSocketMessage(ws, data) {
     console.log('Handling WebSocket message:', data);
     const { type, room, payload } = data;
@@ -66,10 +67,17 @@ function handleWebSocketMessage(ws, data) {
 
 function createRoom(ws, room) {
     console.log('Creating room:', room);
-    ws.room = room;
-    rooms.set(room, { clients: [ws], todos: [] });
-    sendJoinedMessage(ws, room);
+    const roomName = room;
+    if (rooms.has(roomName)) {
+        ws.send(JSON.stringify({ type: 'error', payload: { message: 'Room already exists' } }));
+    } else {
+        rooms.set(roomName, { clients: [ws], todos: [] }); // Use 'set' to add a room to the Map
+        ws.room = roomName; // Assign room to the WebSocket object
+        ws.send(JSON.stringify({ type: 'room-created', roomName }));
+        sendJoinedMessage(ws, room);
+    }
 }
+
 
 function joinRoom(ws, room) {
     console.log('Joining room:', room);

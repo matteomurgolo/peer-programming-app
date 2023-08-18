@@ -101,6 +101,10 @@ function handleWebSocketMessage(data) {
             renderTodos(payload);
             break;
 
+        case 'error':
+            console.log('Received error:', payload);
+            alert(payload.message);
+            break;
         // Handle other message types if needed
     }
 }
