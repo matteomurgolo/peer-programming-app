@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <div class="section" id="room-section">
-            <h1>Welcome to TodoTemp !</h1>
+            <h1 style="display: flex;">Welcome to TodoTemp !<span class='todotemp-icon'></span></h1>
             <h2>Enter room name to create or join a room</h2>
             <p>Share the room name with your friends to collaborate.</p>
             <p>Once there are no more users in a room, the room and its contents are automatically destroyed.</p>
@@ -30,7 +30,7 @@
         </div>
 
         <div class="section hidden" id="todo-section">
-            <h2>Todos for Room: <span id="current-room"></span></h2>
+            <h2 style="display: flex;"><span class='todotemp-icon'></span>Todos for Room: <span id="current-room"></span></h2>
             <div id="todo-list"></div>
             <div class="input-container">
                 <input type="text" id="todo-input" class="input-field" placeholder="Enter todo text">

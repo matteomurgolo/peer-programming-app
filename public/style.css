@@ -12,6 +12,15 @@ body {
     min-height: 100vh;
 }
 
+.todotemp-icon {
+    margin: 0px 10px;
+    background: url('assets/icon.jpg');
+    height: 32px;
+    width: 32px;
+    display: block;
+}
+
+
 .container {
     max-width: 800px;
     width: 100%;
