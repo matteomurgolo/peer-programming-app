@@ -18,20 +18,33 @@ document.addEventListener('DOMContentLoaded', () => {
     createRoomButton.addEventListener('click', () => {
         const roomName = document.getElementById('room-name').value;
         if (roomName.trim() !== '') {
+            // Send a message to the WebSocket server with the room name
             const message = JSON.stringify({ type: 'createRoom', room: roomName });
             socket.send(message);
             currentRoom = roomName;
+
+            // Show the todo section
             showTodoSection(currentRoom);
+
+            // Focus on the input field after creating a room and clear the value
+            document.getElementById('todo-input').focus();
+            document.getElementById('todo-input').select();
+            document.getElementById('room-name').value = '';
         }
     });
 
     joinRoomButton.addEventListener('click', () => {
-        const roomName = document.getElementById('room-name').value;
+        const roomName = document.getElementById('room-name').value; // Get the room name from the input field
+
+        // Send a message to the WebSocket server with the room name
         if (roomName.trim() !== '') {
             const message = JSON.stringify({ type: 'joinRoom', room: roomName });
             socket.send(message);
             currentRoom = roomName;
             showTodoSection(currentRoom);
+            document.getElementById('todo-input').focus();
+            document.getElementById('todo-input').select();
+            document.getElementById('room-name').value = '';
         }
     });
 
@@ -53,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function addTodo(text) {
         const message = JSON.stringify({ type: 'addTodo', room: currentRoom, payload: { text } });
         socket.send(message);
+        document.getElementById('todo-input').value = '';
     }
 
     addTodoButton.addEventListener('click', () => {
