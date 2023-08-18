@@ -23,7 +23,6 @@ jobs:
           npm install
           cd public
           npm install
-          npm run build
           cd ..
           docker build -t app:latest .
 
