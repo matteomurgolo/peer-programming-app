@@ -61,6 +61,17 @@ function handleWebSocketMessage(ws, data) {
             }
             break;
 
+        case 'deleteTodo':
+            if (ws.room && rooms.has(ws.room)) {
+                const { todos } = rooms.get(ws.room);
+                const index = todos.findIndex(todo => todo.text === payload.todoText);
+                if (index !== -1) {
+                    todos.splice(index, 1);
+                    broadcastTodos(ws.room);
+                }
+            }
+            break;
+
         // Handle other message types as needed
     }
 }
