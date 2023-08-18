@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const joinRoomButton = document.getElementById('join-room');
     const addTodoButton = document.getElementById('add-todo'); // Define addTodoButton here
     const todoSection = document.getElementById('todo-section'); // Define todoSection
+    const deleteButtons = document.getElementsByClassName('delete-button'); // Define deleteButtons here
 
     todoSection.style.display = 'none'; // Hide the todo section initially
 
@@ -45,6 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('todo-input').focus();
             document.getElementById('todo-input').select();
             document.getElementById('room-name').value = '';
+        }
+    });
+
+    // Add an event listener for delete buttons
+    document.addEventListener('click', (event) => {
+        if (event.target.className === 'delete-button') {
+            const todoText = event.target.previousElementSibling.textContent;
+            const message = JSON.stringify({ type: 'deleteTodo', room: currentRoom, payload: { todoText } });
+            socket.send(message);
         }
     });
 
