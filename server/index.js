@@ -41,6 +41,10 @@ function handleWebSocketMessage(ws, data) {
             joinRoom(ws, room);
             break;
 
+        case 'leaveRoom':
+            removeClientFromRoom(ws);
+            break;
+
         case 'addTodo':
             if (ws.room && rooms.has(ws.room)) {
                 const { todos } = rooms.get(ws.room);
