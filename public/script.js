@@ -133,7 +133,7 @@ function renderTodos(todoList) {
         todoItem.innerHTML = `
         <input type="checkbox" class="checkbox" ${todo.state === 'completed' ? 'checked' : ''}>
         <span class="todo-text ${todo.state === 'completed' ? 'completed' : ''}">${todo.text}</span>
-        <button class="button delete-button"><i class="fas fa-trash"></i></button>
+        <button class="delete-button"><i class="fas fa-trash"></i></button>
       `;
         todoContainer.appendChild(todoItem);
     });

@@ -59,10 +59,52 @@ body {
 
 .delete-button {
     background-color: transparent;
-    border: none;
+    color: #fff;
+    border: 1px solid #d73a49;
+    border-radius: 4px;
+    padding: 10px 20px;
     cursor: pointer;
     font-size: 14px;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
     color: #d73a49;
+}
+
+.delete-button {
+    color: #FFF;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.delete-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+}
+
+.delete-button:hover::before {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+}
+
+.delete-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transform: scale(1.2, 1.2);
 }
 
 .input-container {
