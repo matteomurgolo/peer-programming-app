@@ -8,11 +8,13 @@ socket.addEventListener('open', () => {
 let currentRoom = ''; // Define currentRoom in a global scope
 
 document.addEventListener('DOMContentLoaded', () => {
+    const roomSection = document.getElementById('room-section');
     const createRoomButton = document.getElementById('create-room');
     const joinRoomButton = document.getElementById('join-room');
     const addTodoButton = document.getElementById('add-todo'); // Define addTodoButton here
     const todoSection = document.getElementById('todo-section'); // Define todoSection
     const deleteButtons = document.getElementsByClassName('delete-button'); // Define deleteButtons here
+    const leaveRoomButton = document.getElementById('leave-room'); // Define leaveRoomButton here
 
     todoSection.style.display = 'none'; // Hide the todo section initially
 
@@ -27,26 +29,48 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show the todo section
             showTodoSection(currentRoom);
 
+            roomSection.style.display = 'none';
+
             // Focus on the input field after creating a room and clear the value
             document.getElementById('todo-input').focus();
             document.getElementById('todo-input').select();
             document.getElementById('room-name').value = '';
+            leaveRoomButton.style.display = 'block';
         }
     });
 
     joinRoomButton.addEventListener('click', () => {
         const roomName = document.getElementById('room-name').value; // Get the room name from the input field
 
-        // Send a message to the WebSocket server with the room name
+        // Check if the user entered a room name
         if (roomName.trim() !== '') {
+
+            // Send a message to the WebSocket server with the room name
             const message = JSON.stringify({ type: 'joinRoom', room: roomName });
             socket.send(message);
             currentRoom = roomName;
+
+            // Show the todo section
             showTodoSection(currentRoom);
+
+            // Hide the room section
+            roomSection.style.display = 'none';
+
+            // Focus on the input field after joining a room and clear the value
             document.getElementById('todo-input').focus();
             document.getElementById('todo-input').select();
             document.getElementById('room-name').value = '';
+            leaveRoomButton.style.display = 'block';
         }
+    });
+
+    // Add an event listener for the leave room button and send a message to the WebSocket server
+    leaveRoomButton.addEventListener('click', () => {
+        const message = JSON.stringify({ type: 'leaveRoom', room: currentRoom });
+        socket.send(message);
+        currentRoom = '';
+        todoSection.style.display = 'none';
+        roomSection.style.display = 'block';
     });
 
     // Add an event listener for delete buttons
