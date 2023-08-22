@@ -21,9 +21,6 @@ jobs:
       - name: Build and Test
         run: |
           npm install
-          cd public
-          npm install
-          cd ..
           docker build -t app:latest .
 
       - name: Test with Docker Compose
