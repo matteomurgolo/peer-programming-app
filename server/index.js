@@ -1,14 +1,19 @@
 const express = require('express');
 const http = require('http');
-const WebSocket = require('ws');
+const socketIo = require('socket.io');
+const cors = require('cors');
+
 
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const wss = socketIo(server, {
+    cors: {
+        origin: '*',
+    }
+});
 const path = require('path');
 
-// Serve the public folder
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(cors());
 
 const rooms = new Map();
 
@@ -21,7 +26,7 @@ wss.on('connection', (ws) => {
         handleWebSocketMessage(ws, data);
     });
 
-    ws.on('close', () => {
+    ws.on('disconnect', () => {
         console.log('Client disconnected');
         removeClientFromRoom(ws);
     });
@@ -129,6 +134,8 @@ function broadcast(room, data) {
 
 function broadcastTodos(room) {
     const todos = rooms.get(room).todos;
+    console.log('Broadcasting todos to:', room);
+    console.log('Todos:', todos);
     broadcast(room, { type: 'todosUpdated', payload: todos });
 }
 
