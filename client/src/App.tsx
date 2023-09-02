@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { States } from './enums/states'
+import { ThemeProvider } from "@/components/theme-provider"
 
 // Import Components and Socket
 import CreateRoom from './components/createRoom'
@@ -7,6 +8,7 @@ import JoinRoom from './components/joinRoom'
 import socket from './socketClient'
 import DisplaySession from './components/session'
 import Home from './components/home'
+import { ModeToggle } from './components/mode-toggle'
 
 interface Todo {
   id: number,
@@ -72,8 +74,11 @@ function App() {
   }, [])
 
   return (
-    <>
+    <ThemeProvider defaultTheme='light' storageKey="vite-ui-theme">
       <div className="App">
+        <div className='absolute right-2 top-2'>
+          <ModeToggle />
+        </div>
         {index == 0 ?
           <Home fromChild={setIndex} />
           : null}
@@ -87,7 +92,7 @@ function App() {
           <DisplaySession todos={todos} roomName={roomName} onCheckboxChange={handleCheckboxChange} />
           : null}
       </div >
-    </>
+    </ThemeProvider>
   )
 }
 

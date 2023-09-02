@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 import { Button } from './ui/button'
+import { Input } from './ui/input'
 import { States } from '../enums/states'
 import socket from "../socketClient"
 
@@ -24,7 +25,7 @@ export default function JoinRoom(props: any) {
                     <CardDescription>Enter room name to join an existing session.</CardDescription>
                 </CardContent>
                 <div className='flex flex-col items-center justify-center my-5'>
-                    <input className='border-2 border-black rounded-md p-2 m-2' type='text' placeholder='Room name' onChange={e => setRoomName(e.target.value)} />
+                    <Input className='border-2 border-black rounded-md p-2 m-2' type='text' placeholder='Room name' onChange={e => setRoomName(e.target.value)} />
                     <Button onClick={() => {
                         HandleJoinRoom();
                     }}>Join a room</Button>
