@@ -1,10 +1,12 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from "@/components/ui/input"
 import { Button } from '@/components/ui/button'
+import { Separator } from "@/components/ui/separator"
 import { useState } from 'react'
 import socket from '../socketClient'
 
 import DisplayTodo from './todos'
+import Toolbar from './toolbar'
 
 interface Todo {
     id: number,
@@ -31,13 +33,13 @@ export default function DisplaySession(props: Props) {
     return (
         <div className='h-screen w-screen flex flex-col items-center justify-center'>
             <Card className='flex flex-col items-center w-[80%] h-[80%]'>
-                <CardHeader className='flex flex-col items-center'>
+                <CardHeader className='flex flex-col items-center w-full'>
                     <CardTitle>Collaborative session</CardTitle>
                     <CardDescription>Code : {roomName}</CardDescription>
+                    <Toolbar />
+                    <Separator />
                 </CardHeader>
                 <CardContent className='w-full flex flex-col justify-start'>
-                    <hr
-                        className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:opacity-100" />
                     <DisplayTodo todos={todos} onCheckboxChange={onCheckboxChange} roomName={roomName} />
                 </CardContent>
                 <CardFooter className='w-full h-full'>

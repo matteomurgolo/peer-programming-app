@@ -29,7 +29,7 @@ export default function DisplayTodo(props: Props) {
                         checked={todo.state === 'completed'}
                         onChange={(e) => onCheckboxChange(todo.text, e.target.checked ? 'completed' : 'incomplete')}
                     />
-                    <span className="mx-2">{todo.text}</span>
+                    <span className="mx-2 w-full">{todo.text}</span>
                     <div className="flex items-end w-full justify-end h-full">
                         <button className="border-2 rounded-2xl px-2" onClick={() => onRemove(todo.text)}>Remove</button>
                     </div>
