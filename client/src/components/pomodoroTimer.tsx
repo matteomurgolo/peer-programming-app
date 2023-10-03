@@ -54,7 +54,7 @@ export default function PomodoroTimer(props: Props) {
             <div className='my-2'>
                 <span className='text-3xl'>{`${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`}</span>
             </div>
-            <div className='space-x-2 my-2'>
+            <div className='md:space-x-2 md:my-2 md:flex-row flex-col flex space-y-1 md:space-y-0'>
                 <Button onClick={() => setIsActive(!isActive)} className='h-8'>
                     {isActive ? 'Pause' : 'Start'}
                 </Button>

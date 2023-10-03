@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
-import { States } from '../enums/states'
 import socket from "../socketClient"
 
-export default function JoinRoom(props: any) {
+export default function JoinRoom() {
     const [roomName, setRoomName] = useState('');
 
     function HandleJoinRoom() {
